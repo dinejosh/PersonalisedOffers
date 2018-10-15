@@ -1,0 +1,72 @@
+<!--The content below is only a placeholder and can be replaced.-->
+
+<div style="text-align:center">
+  <h1>
+    Welcome to {{ title }}!
+  </h1>
+  <img width="300" alt="Project Logo" src="">
+</div>
+
+<div *ngIf="notoken">
+<h2 >Entre Authentication token to login </h2>
+
+Authentication_token:<input type="text" [(ngModel)]="token_id"/>
+<button (click)="setToken()" >submit Token</button>
+
+</div>
+<div *ngIf="notoken==false" >
+Account_Id: <input type="text" [(ngModel)]="Account_Id"/>
+<button (click)="checkBal()" >Check accountDetails</button> <br><br><br>
+</div>
+
+<div *ngIf="isAccount" >
+
+Account_Id:{{isAccount.Data.Balance[0].AccountId}}<br>
+Balance:{{isAccount.Data.Balance[0].Amount.Amount}}{{isAccount.Data.Balance[0].Amount.Currency}}<br>
+CreditDebitIndicator:{{isAccount.Data.Balance[0].CreditDebitIndicator}}<br>
+DateTime:{{isAccount.Data.Balance[0].DateTime}}<br>
+Type:{{isAccount.Data.Balance[0].Type}}<br>
+
+<ul> 
+
+  <li>
+    <h2><button (click)="showBenificiaryData()" >showBenificiaryData</button> </h2>
+  </li>
+  <li>
+    <h2><button (click)="trans()" >Transactions</button> </h2>
+  </li>
+  <li>
+    <h2><button (click)="ShowOffers()" >Applicable offers</button> </h2>
+  </li>
+</ul>
+<div *ngIf="isBenif" >
+  <ul>
+ <div *ngFor="let ben of isBenif.Data.Beneficiary" >
+    <li>Account_Id:{{ben.AccountId}}<br></li>
+    <li>BeneficiaryId:{{ben.BeneficiaryId}}<br></li>
+    <li>xReference:{{ben.Reference}}<br></li>
+   <li> CreditorAccount:<br></li>
+    SchemeName:{{ben.CreditorAccount.SchemeName}}<br>
+    Identification:{{ben.CreditorAccount.Identification}}<br>
+    Name:{{ben.CreditorAccount.Name}}<br>
+    SecondaryIdentification:{{ben.CreditorAccount.SecondaryIdentification}}<br>
+</div>
+
+  </ul>
+  <div *ngIf="trans1">
+    <div *ngFor="let ben of trans1.Data.Transaction">
+
+        <li>Account_Id:{{trans1.AccountId}}<br></li>
+    <li>TransactionId:{{trans1.TransactionId}}<br></li>
+    <li>TransactionReference:{{trans1.TransactionReference}}<br></li>
+   <li> Amount:{{trans1.Amount.Amount}}{{trans1.Amount.Currency}}<br>
+    CreditDebitIndicator:{{trans1.CreditDebitIndicator}}<br>
+    Status:{{trans1.Status}}<br>
+    BookingDateTime:{{trans1.BookingDateTime}}<br>
+    </div>
+  
+    </div>
+    
+</div>
+
+</div>
